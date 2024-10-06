@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate Zen Hub</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/week2task-main/static/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Zen Hub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#assessment">Assessment</a></li>
+                <li class="nav-item"><a class="nav-link" href="#benefits">Benefits</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                <li class="nav-item"><a class="nav-link" href="#community">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="bg-light py-4" style="margin-top: 70px;">
+        <div class="container text-center">
+            <h1 class="display-4">The Ultimate Zen Hub</h1>
+            <p class="lead">Discover Your Path to Mindfulness</p>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Assess Your Well-Being</h1>
+            <p>Take a moment to understand your stress levels and mood patterns.</p>
+            <a href="#assessment" class="btn btn-custom">Start Your Assessment</a>
+        </div>
+    </section>
+
+    <section class="container py-5" id="assessment-questions">
+        <h2 class="text-success">Your Assessment Questions</h2>
+        <div class="question-container">
+            <!-- Loop through the predefined questions passed from the backend -->
+            {% for question in questions %}
+            <div class="question-box">
+                <h2>Question {{ loop.index }}: {{ question }}</h2>
+                <input type="text" id="response-{{ loop.index }}" placeholder="Your answer">
+                <button onclick="submitResponse('{{ loop.index }}')">Submit</button>
+                <p id="score-{{ loop.index }}"></p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="container py-5" id="assessment-results">
+        <h2 class="text-success">Your Assessment Results</h2>
+        <div>
+            <h2>Overall Well-being Score: <span id="final-score"></span></h2>
+            <button onclick="calculateFinalScore()">Calculate Final Score</button>
+        </div>
+    </section>
+
+    <section class="container py-5" id="benefits">
+        <h2 class="text-success">Why Take This Assessment?</h2>
+        <ul class="list-unstyled">
+            <li><span class="benefit-icon">✅</span> Understand your stress triggers.</li>
+            <li><span class="benefit-icon">✅</span> Track mood patterns over time.</li>
+            <li><span class="benefit-icon">✅</span> Receive tailored recommendations for improvement.</li>
+        </ul>
+    </section>
+
+    <section class="container py-5" id="testimonials">
+        <h2 class="text-success">What Our Users Say</h2>
+        <div class="testimonial">
+            <p><strong>Karamveer:</strong> "This assessment helped me understand my stress and provided valuable insights
+                into my well-being."</p>
+        </div>
+        <div class="testimonial">
+            <p><strong>Shubhika:</strong> "A wonderful tool! I’ve been able to track my mood and make positive
+                changes."</p>
+        </div>
+    </section>
+
+    <section class="container py-5" id="community">
+        <h2 class="text-success">Join Our Community</h2>
+        <p>At The Ultimate Zen Hub, we believe in the power of connection. Join our community to share experiences,
+            support one another, and grow together in mindfulness.</p>
+        <div class="community">
+            <h4>Share Your Story</h4>
+            <p>Have you experienced a breakthrough in your wellness journey? Share your story with us, and inspire
+                others in the community.</p>
+            <textarea class="form-control" rows="3" placeholder="Write your story here..."></textarea>
+            <button class="btn btn-custom mt-2">Submit</button>
+        </div>
+        <div class="community">
+            <h4>Tips for Mindfulness</h4>
+            <ul>
+                <li>Practice deep breathing for 5 minutes each day.</li>
+                <li>Take a mindful walk in nature and observe your surroundings.</li>
+                <li>Set aside time each week for self-care activities.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="container py-5" id="faq">
+        <h2 class="text-success">Frequently Asked Questions</h2>
+        <div class="faq">
+            <h4 onclick="toggleFAQ(this)">How long does the assessment take?</h4>
+            <div class="faq-content">
+                <p>The assessment typically takes about 10 minutes to complete.</p>
+            </div>
+        </div>
+        <div class="faq">
+            <h4 onclick="toggleFAQ(this)">Is my data safe?</h4>
+            <div class="faq-content">
+                <p>Yes, we prioritize your privacy and data security. Your information is confidential.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light py-4">
+        <div class="container text-center">
+            <p>© 2024 The Ultimate Zen Hub | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            <p>Follow us on:
+                <a href="#">Facebook</a> |
+                <a href="#">Instagram</a> |
+                <a href="#">Twitter</a>
+            </p>
+            <form class="form-inline justify-content-center mt-3">
+                <input class="form-control mr-2" type="email" placeholder="Subscribe for tips" aria-label="Email">
+                <button class="btn btn-custom" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/week2task-main/static/script.js"></script>
+</body>
+
+</html>
